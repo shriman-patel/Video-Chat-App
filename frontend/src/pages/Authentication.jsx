@@ -23,7 +23,8 @@ const defaultTheme = createTheme();
 
 export default function Authentication() {
 
-    
+    // for image
+    const [backgroundImageUrl, setBackgroundImageUrl] = React.useState(''); 
 
     const [username, setUsername] = React.useState();
     const [password, setPassword] = React.useState();
@@ -39,6 +40,37 @@ export default function Authentication() {
 
     const { handleRegister, handleLogin } = React.useContext(AuthContext);
 
+
+ React.useEffect(() => {
+ const fetchImage = async () => {
+try {
+        
+const uniqueUrl = `http://localhost:8000/api/v1/random-wallpaper?t=${new Date().getTime()}`;
+
+const response = await fetch(uniqueUrl); 
+const data = await response.json();
+
+if (data.image) {
+
+    let optimizedUrl = data.image.replace(/w=\d+/, 'w=800'); 
+
+    const finalImageUrl = `url(${optimizedUrl})`;
+setBackgroundImageUrl(finalImageUrl);
+console.log("SUCCESS: Image URL set in state:", finalImageUrl); 
+}
+ else {
+ setBackgroundImageUrl('url(https://picsum.photos/1200/900?random)');
+ }
+} catch (error) {
+console.error("Error fetching background image:", error);
+ setBackgroundImageUrl('url(https://picsum.photos/1200/900?random)');
+ }
+};
+
+ fetchImage();
+}, []);
+
+    
     let handleAuth = async () => {
         try {
             if (formState === 0) {
@@ -68,16 +100,17 @@ export default function Authentication() {
 
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
+            <Grid container component="main" sx={{ height: '100vh'}}>
                 <CssBaseline />
-                <Grid
+                 <Grid
                     item
                     xs={false}
                     sm={4}
                     md={7}
+                      key={backgroundImageUrl} 
                     sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-                        backgroundRepeat: 'no-repeat',
+                    backgroundImage: backgroundImageUrl,                        
+                    backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                         backgroundSize: 'cover',

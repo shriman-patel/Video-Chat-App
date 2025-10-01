@@ -50,7 +50,7 @@ export default function History() {
             <IconButton onClick={() => {
                 routeTo("/home")
             }}>
-                <HomeIcon />
+            <HomeIcon />
             </IconButton >
             {
                 (meetings.length !== 0) ? meetings.map((e, i) => {

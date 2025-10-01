@@ -4,7 +4,7 @@
 .landingPageContainer{
   width: 100w;
   height: 100vh;
-  background: url("/public/background.jpg");
+  background:url(../public/background.png);
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
@@ -80,3 +80,31 @@ font-size: 1.7rem;
   height: auto;
   border-radius: 20px;
 }
+
+.video-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bg-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1; /* background me rahega */
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  top: 40%;
+  font-family: Arial, sans-serif;
+}
+
+/* live video chat */

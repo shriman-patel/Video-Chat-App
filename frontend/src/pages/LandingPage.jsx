@@ -29,7 +29,7 @@ export default function LandingPage() {
       </div>
         </div>
         <div>
-            <img src='/videocall_image.jpg' alt=''></img>
+            <img src='/mobile.png' alt=''></img>
         </div>
 
     </div>

@@ -35,7 +35,7 @@ let handleJoinVideoCall = async() => {
       </IconButton>
       <Button onClick={ () => {
         localStorage.removeItem("token");
-        navigate('/home');
+        navigate('/');
       }}>
         Logout
       </Button>

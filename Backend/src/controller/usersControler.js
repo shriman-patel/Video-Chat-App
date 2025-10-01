@@ -49,12 +49,12 @@ const register = async(req, res)=>{
      });
      await newUser.save();
      res.status(httpStatus.CREATED).json({ message: "User registered" });
-
         
-    }catch (e){
-         res.json({ message: `Something went wrong ${e}`});
+    }catch (e) {
+  console.error("Registration error:", e);
+  return res.status(500).json({ message: "Registration failed", error: e.message });
+}
 
-    }
 }
 
 const getUserHistory = async(req, res) => {
