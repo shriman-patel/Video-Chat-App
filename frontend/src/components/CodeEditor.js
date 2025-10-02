@@ -6,7 +6,7 @@ import Editor from '@monaco-editor/react';
 
 // NOTE: Yeh component assume karta hai ki aap isko 'socket' aur 'roomPath' props de rahe hain.
 
-function CodeEditor({ socket, roomPath }) {
+function CodeEditor({ socket, roomId }) {
     // 1. State for Code and Language (Shuruwat mein yeh code sabko milega)
     const [code, setCode] = useState('// Welcome to the collaborative editor!\nconsole.log("Hello World");');
     const [language, setLanguage] = useState('javascript');
@@ -41,11 +41,11 @@ function CodeEditor({ socket, roomPath }) {
         setCode(value);
 
         // B. Socket se dusron ko bhejo
-        if (socket && roomPath) {
+        if (socket && roomId) {
             // 'code-change' event backend ko bhejo
             socket.emit("code-change", {
                 // Backend mein matchingRoom ke liye roomPath (meeting ID) zaroori hai
-                roomId: roomPath, 
+                roomId: roomId, 
                 code: value,
                 language: language 
             });

@@ -26,13 +26,13 @@ const ResponsiveControlBar = ({
     const menuHiddenButtons = (
         <>
             {/* End Call */}
-            <IconButton onClick={handleEndCall} style={{ color: "red" }}>
+            <IconButton onClick={handleEndCall}  style={{ color: "red" }}>
                 <CallEndIcon />
             </IconButton>
             
             {/* Screen Share */}
             {screenAvailable && (
-                <IconButton onClick={toggleScreenShare} style={{ color: "white" }}>
+                <IconButton onClick={toggleScreenShare}  disabled={!screenAvailable} style={{ color: "white" }}>
                     {isScreenSharing ? <StopScreenShareIcon /> : <ScreenShareIcon />}
                 </IconButton>
             )}

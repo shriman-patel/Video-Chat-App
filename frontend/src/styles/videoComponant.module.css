@@ -13,8 +13,9 @@
 left: 15px; 
   bottom: 90px;
  border-radius: 20px;
- position: fixed;
- z-index: 10; 
+ position: absolute;
+ z-index: 100; 
+ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }  
 
 
@@ -107,6 +108,16 @@ left: 15px;
     overflow-y: auto;
     padding-bottom: 70px;
 }
+
+.codeEditorView {
+    width: 100%;
+    height: 100%;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 10; /* मुख्य बैकग्राउंड */
+}
+
 .codeEditorBox {
     position: absolute;
     top: 0;
