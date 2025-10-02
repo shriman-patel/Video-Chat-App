@@ -7,6 +7,7 @@ import { AuthProvider } from './contexts/AuthContexts.jsx';
 import VideoMeet from './pages/VideoMeet.jsx';
 import HomeComponent from './pages/home.jsx';
 import History from './pages/history.jsx';
+import Groups from './pages/Groups.jsx';
 function App() {
   return (
     <div className='App'>
@@ -17,6 +18,7 @@ function App() {
         <Route path='/auth' element={<Authentication></Authentication>}/>
         <Route path='/home' element={<HomeComponent/>} />
         <Route path='/history' element={<History></History>}/>
+        <Route path='/group' element={<Groups />}/>
         <Route path='/:url' element={<VideoMeet/>}/>
       </Routes>
       </AuthProvider>

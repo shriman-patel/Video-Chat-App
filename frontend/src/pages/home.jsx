@@ -26,6 +26,11 @@ let handleJoinVideoCall = async() => {
     <div style={{ display:" flex", alignItems: "center" }}>
         <h1>Video Call</h1>
     </div>
+      <Button onClick={ () => {
+        navigate('/group');
+      }}>
+        Group
+      </Button>
     <div style={{display : 'flow', alignItems: "center"}}>
       <IconButton onClick={ () => {
         navigate("/history")
@@ -44,9 +49,9 @@ let handleJoinVideoCall = async() => {
 <div className="meetContainer">
   <div className="leftPanel">
     <div>
-    <h2>provaidin Quality video call just like Quality</h2>
+    <h2 style={{color: "green"}}>Create Meeting </h2>
     <div style={{display: 'flex', gap: "10px"}}>
-        <TextField onChange={e => setMeetingCode(e.target.value)} id='outline' ></TextField>
+        <TextField placeholder="Enter Join Path"   onChange={e => setMeetingCode(e.target.value)} id='outline' ></TextField>
         <Button onClick={handleJoinVideoCall} variant='contained'>Join</Button>
     </div>
     </div>
