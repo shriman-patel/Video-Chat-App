@@ -1,110 +1,327 @@
-*{
+/* ==================================== */
+/* 1. Global Reset and Base Styles */
+/* ==================================== */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.landingPageContainer{
-  width: 100w;
-  height: 100vh;
-  background:url(../public/background.png);
+
+body {
+  font-family: 'Roboto', 'Arial', sans-serif;
+  background-color: #f5f6fa;
+}
+
+/* ==================================== */
+/* 2. Landing Page Styles (Desktop) */
+/* ==================================== */
+.landingPageContainer {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #1e1933;
+  background-image: url(../public/background.png);
   background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
   color: white;
-}
-.landingPageContainer nav{
-  padding-inline: 1.2rem;
-  padding-block: 1.6rem;
-  display: flex;
-  justify-content: space-between;
-
-}
-.landingPageContainer nav h2{
-font-size: 1.8rem;
-font-weight: 500;
-}
-.landingPageContainer nav .navlist{
-  display: flex;
-  gap: 1.6rem;
-  cursor: pointer;
-}
-.landingMainContainer{
- display: flex;
- justify-content: space-between;
- padding-inline: 3rem;
- height: 80vh;
- align-items: center;
-}
-.landingMainContainer >div:nth-child(1){
-    font-size: 2.2rem;
-}
-.landingMainContainer >div:nth-child(1) div[role='button']{
-background: #D97500;
-width: fit-content;
-padding: 0.5rem;
-border-radius: 20px;
-margin-top: 1.9rem;
-}
-
-.landingMainContainer >div:nth-child(1) div[role='button'] a {
-text-decoration: none;
-color: white;
-font-size: 1.7rem;
-}
-.landingMainContainer > div:nth-child(2)img{
-  height: 70vh;
-  width: auto;
-}
-
-.navBar{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: 20px;
-}
-.meetContainer{
-  display: flex;
-  padding-inline: 20px;
-  height: 80vh;
-  gap: 10vw;
-  justify-content: center;
-}
-.leftPanel{
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-.rightPanel{
-  display: flex;
-  align-items: center;
-}
-.rightPanel > img{
-  width: 30vw;
-  height: auto;
-  border-radius: 20px;
-}
-
-.video-container {
-  position: relative;
-  height: 100vh;
-  width: 100%;
   overflow: hidden;
 }
 
-.bg-video {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  z-index: -1; /* background me rahega */
-}
-
-.content {
+/* Navigation Bar */
+.landingPageContainer nav {
+  padding-inline: 4rem;
+  padding-block: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(30, 25, 51, 0.9);
+  box-shadow: none;
   position: relative;
-  z-index: 1;
-  color: white;
-  text-align: center;
-  top: 40%;
-  font-family: Arial, sans-serif;
+  z-index: 10;
 }
 
-/* live video chat */
+.landingPageContainer nav .navHeader h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.landingPageContainer nav .navlist {
+  display: flex;
+  gap: 1.6rem;
+  cursor: pointer;
+  align-items: center;
+}
+
+.landingPageContainer nav .navlist p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.3s ease;
+}
+
+.landingPageContainer nav .navlist p:hover {
+  color: #9C27B0;
+}
+
+.landingPageContainer nav .navlist div[role='button'] {
+  background: #E53935;
+  padding: 0.7rem 1.6rem;
+  border-radius: 25px;
+  margin-left: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.landingPageContainer nav .navlist div[role='button']:hover {
+  background: #F44336;
+  transform: translateY(-2px);
+}
+
+.landingPageContainer nav .navlist div[role='button'] a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+}
+
+/* Main Content */
+.landingMainContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 6rem;
+  min-height: calc(100vh - 80px);
+  text-align: left;
+  position: relative;
+  z-index: 5;
+}
+
+.landingMainContainer > div:nth-child(1) {
+  max-width: 600px;
+  margin-right: 80px;
+}
+
+.landingMainContainer > div:nth-child(1) h1 {
+  font-size: 4.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.landingMainContainer > div:nth-child(1) h1 span {
+  color: #FFEB3B;
+}
+
+.landingMainContainer > div:nth-child(1) p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.landingMainContainer > div:nth-child(1) div[role='button'] {
+  background: #4CAF50;
+  padding: 1.2rem 3rem;
+  border-radius: 50px;
+  margin-top: 0;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.landingMainContainer > div:nth-child(1) div[role='button']:hover {
+  background: #66BB6A;
+  transform: scale(1.03);
+}
+
+.landingMainContainer > div:nth-child(1) div[role='button'] a {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: white;
+}
+
+.landingMainContainer > div:nth-child(2) img {
+  max-height: 85vh;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+  transition: transform 0.5s ease;
+}
+
+/* ==================================== */
+/* 3. Home Page Styles (Desktop) */
+/* ==================================== */
+.navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navBar h1 {
+  font-size: 1.8rem;
+  color: #3f51b5;
+  margin: 0;
+  font-weight: 600;
+}
+
+.navBar > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navBar p {
+  font-size: 0.85rem;
+  margin: 0;
+  color: #555;
+}
+
+.navBar .MuiIconButton-root:hover {
+  background-color: rgba(63, 81, 181, 0.1);
+}
+
+.meetContainer {
+  display: flex;
+  padding: 50px 80px;
+  gap: 50px;
+  margin: 40px auto;
+  max-width: 1200px;
+  justify-content: space-between;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+}
+
+.leftPanel {
+  flex: 1;
+  padding: 40px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.leftPanel h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #3f51b5;
+}
+
+.leftPanel > div > div {
+  display: flex;
+  gap: 15px;
+  align-items: center; /* Ensures vertical alignment for desktop */
+}
+
+.rightPanel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightPanel img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  min-height: 300px;
+}
+
+/* ==================================== */
+/* 4. Responsive Styles */
+/* ==================================== */
+
+/* Tablet and Small Laptop (Up to 992px) */
+@media (max-width: 992px) {
+  /* Landing Page Tablet */
+  .landingMainContainer {
+    flex-direction: column;
+    text-align: center;
+    padding-inline: 2rem;
+    padding-block: 4rem;
+    justify-content: center;
+  }
+  .landingMainContainer > div:nth-child(1) {
+    margin-right: 0;
+    margin-bottom: 3rem;
+  }
+  .landingMainContainer > div:nth-child(1) h1 {
+    font-size: 4rem;
+  }
+  .landingMainContainer > div:nth-child(2) img {
+    max-height: 50vh;
+    min-height: auto;
+  }
+  .landingPageContainer nav {
+    padding-inline: 2rem;
+  }
+}
+
+/* Phone and Large Phone (Up to 768px) */
+@media (max-width: 768px) {
+  /* Landing Page Phone */
+  .landingPageContainer nav {
+    padding-inline: 1rem;
+  }
+  .landingPageContainer nav .navlist {
+    gap: 0.8rem;
+  }
+  .landingMainContainer {
+    padding-inline: 1rem;
+    min-height: 80vh;
+  }
+  .landingMainContainer > div:nth-child(1) {
+    order: 2;
+    margin-right: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+  }
+  .landingMainContainer > div:nth-child(1) h1 {
+    font-size: 2.5rem;
+  }
+  .landingMainContainer > div:nth-child(1) div[role='button'] {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.8rem 1.2rem;
+  }
+  .landingMainContainer > div:nth-child(2) img {
+    order: 1;
+    max-height: 35vh;
+  }
+
+  /* Home Page Phone */
+  .meetContainer {
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 40px;
+    margin: 20px auto;
+  }
+  .leftPanel {
+    padding: 25px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .leftPanel > div > div {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch; /* Full width for form elements */
+  }
+  .leftPanel > div > div .MuiTextField-root {
+    width: 100%;
+  }
+  .rightPanel img {
+    min-height: 250px;
+    margin-top: 20px;
+  }
+  .navBar {
+    padding: 10px 20px;
+  }
+  .navBar .MuiIconButton-root {
+    display: none;
+  }
+}

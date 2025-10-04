@@ -24,7 +24,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 
 import server from "../environment";
 
-import CodeEditor from "../components/CodeEditor.js";
+import CodeEditor from "../components/CodeEditor.jsx";
 
 import CodeIcon from "@mui/icons-material/Code";
 
@@ -767,42 +767,29 @@ useEffect(() => {
   return (
 
     <div>
-
        {askForUsername === true ? (
-
-        <div>
-
-          <h2>Enter into Lobby </h2>
-
+        
+        <div  className={styles.mainloddy} >
+          <h2>Join a room</h2>
+         <div  className={styles.entervideo} >
+         <div className={styles.sidebar}> 
           <TextField
-
             id="outlined-basic"
-
-            label="Username"
-
+            label="Enter Full_Name"
             value={username}
-
             onChange={(e) => setUsername(e.target.value)}
-
             variant="outlined"
-
           />
-
           <Button variant="contained" onClick={connect}>
-
             Connect
-
           </Button>
-
-
-
-          <div>
-
+       </div>
+       {/* lobby video  */}
+            <div id="rightvideo">
             <video ref={localVideoref} autoPlay muted></video>
-
-          </div>
-
-        </div>
+            </div>
+</div>
+       </div>
 
       ) : (
 
@@ -854,7 +841,7 @@ useEffect(() => {
 
                      <div className={styles.chattingArea}>
 
-                  <TextField
+                  <TextField className={styles.TextField}
 
                     value={message}
 

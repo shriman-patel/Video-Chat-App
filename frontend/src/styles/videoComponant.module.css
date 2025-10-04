@@ -1,137 +1,200 @@
 .meetVideoContainer{
     position: relative;
-    min-height: 100vh;
-     width: auto;
-     background-color: rgb(63, 2, 72);
-     
-     
+    height: 100vh;
+    width: 100vw;
+    background-color: #1e1e1e;
+    overflow: hidden; 
 }
- .meetUserVideo{
- border: 2px solid rgb(230, 230, 241);
- height: 20vh;
- width: auto;
-left: 15px; 
-  bottom: 90px;
- border-radius: 20px;
- position: absolute;
- z-index: 100; 
- box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}  
-
-
+.meetUserVideo{
+    border: 3px solid #ff4d4d; 
+    height: 18vh;
+    width: auto;
+    max-width: 250px;
+    left: 20px; 
+    bottom: 100px; 
+    border-radius: 6px;
+    position: absolute;
+    z-index: 100; 
+    box-shadow: 0 4px 20px rgba(255, 77, 77, 0.2);
+    object-fit: cover;
+    transform: skewX(-2deg);
+    overflow: hidden; 
+}
+.meetUserVideo video {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    transform: skewX(2deg); 
+}
 .meetUserVideo.codingModeMini {
-    position: absolute; 
     bottom: 50px;
     left: 10px;
     height: 150px;
     width: 200px; 
     z-index: 18; 
-    border: 5px solid #33a0ff;
-    border-radius: 20px;
+    border: 3px solid #33a0ff;
+    border-radius: 4px;
+    transform: none; 
 }
+.meetUserVideo.codingModeMini video {
+    transform: none; 
+}
+
 
 .meetUserVideo.codingModeMiniChatAdjust {
     right: 310px; 
     left: auto; 
 }
-.buttonContainers{
+.buttonContainers {
     position: fixed;
     width: auto;
-    bottom: 5px;
-    text-align: center;
-    z-index: 20;
+    bottom: 30px; 
     left: 50%;
     display: flex;
     align-items: center;
     transform: translateX(-50%);
-    flex-wrap: nowrap; 
-    border: 1px solid red;
-    border-radius: 20px;
-    padding: 3px;
-    background-color: rgb(30, 1, 22);
-    gap: 4px;
-}
-.buttonContainers svg{
-    font-size: 2.5rem;
+    flex-wrap: nowrap;
+    border-radius: 8px; 
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0 25px rgba(255, 77, 77, 0.3);
+    gap: 15px;
+    z-index: 110;
 }
 
+.buttonContainers .MuiIconButton-root {
+    background: #2b2b2b;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 12px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.buttonContainers .MuiIconButton-root[data-hangup="true"] {
+    background: #ff4d4d; 
+}
+
+.buttonContainers .MuiIconButton-root:hover {
+    background: #ff4d4d; 
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 77, 77, 0.4);
+}
+
+
+.buttonContainers svg {
+    font-size: 1.8rem;
+    color: inherit; 
+}
+
+
 .conferenceView{
-  display: flex;
+    display: flex;
     flex-wrap: wrap; 
-    padding: 1rem;
-    height: 100%;
+    padding: 15px;
+    height: 100vh;
     width: 100%;
     gap: 10px;
     border-radius: 10px;
     justify-content: center; 
     align-items: center;
 }
-.conferenceView  video {
- flex-grow: 1; 
- width: 100%;
- height: 100%;
- flex-basis: 100%;
- object-fit: cover;
- border: 5px solid blue;
- 
- 
+.conferenceView video {
+    flex-grow: 1; 
+    min-width: 320px;
+    height: auto; 
+    max-height: 100%;
+    flex-basis: auto; 
+    object-fit: cover;
+    border: 3px solid #666666; 
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: border-color 0.3s;
+}
+.conferenceView video:hover {
+    border-color: #ff4d4d; 
 }
 
-.chatRoom{
+
+.chatRoom {
     position: fixed;
-    height: 90vh;
-    right: 0;
-    background: wheat;
-    border-radius: 10px;
-    width: 40vh;
-    bottom: 10vh;
-    padding-inline: 20px;
-    margin: 10px;
+    height: calc(100vh - 20px); 
+    right: 10px;
     top: 10px;
+    background: #252525; 
+    color: #ffffff;
+    border-radius: 8px;
+    width: 300px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 105; 
+    border: 1px solid #333;
+    display: flex; 
+    flex-direction: column; 
 }
 .chatContainer{
-
     position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
-
 }
-.chattingArea{
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    gap: 10px;
+
+.chatContainer h1 {
+    color: #ff4d4d; 
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 .chattingDisplay{
     flex-grow: 1;
     overflow-y: auto;
-    padding-bottom: 70px;
+    padding-bottom: 100px; 
 }
 
-.codeEditorView {
-    width: 100%;
-    height: 100%;
+.chattingArea{
+    width: 100%; 
+    padding-top: 10px;
+    display: block; 
     position: absolute; 
-    top: 0;
+    bottom: 0;
     left: 0;
-    z-index: 10; /* मुख्य बैकग्राउंड */
+    padding: 10px 15px; 
+    background: #252525; 
+    box-sizing: border-box;
 }
 
-.codeEditorBox {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 10; 
-    background-color: #282c34; 
-    transition: width 0.3s ease-in-out; 
+.chattingArea > div { 
+    width: 100%; 
+    margin-bottom: 10px; 
 }
+
+.chattingArea > div .MuiInputBase-root {
+    width: 100%;
+}
+
+.chattingArea button {
+    width: 100%; 
+    display: block; 
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border: none;
+    padding: 8px 10px; 
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 40px; 
+}
+
+.chattingArea button:hover {
+    background-color: #e04242;
+}
+
+
+
+
 .codeEditorShrink {
     width: calc(100% - 300px); 
 }
-.chatContainerSide {  
+.chatContainerSide { 	
     position: absolute;
     height: 100%;
     right: 0;
@@ -174,16 +237,171 @@ left: 15px;
     z-index: 21;
     
     display: flex;
-    flex-direction: column; /* Buttons ko vertically dikhana zaroori hai */
+    flex-direction: column; 
     gap: 8px;
     width: 150px; 
 }
+.entervideo {
+    display: flex; 
+    gap: 20px; 
+    align-items: flex-start; 
+    padding: 20px; 
+    background-color: #f4f4f9; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-@media (max-width: 768px) {
-    .desktopVisible {
-        display: none; 
-    }  
-    .mobileMenu {
-        display: block; 
+
+.sidebar {
+    width: 250px;
+    margin-top: 20px;
+    padding: 20px;
+    
+    background-color: #ffffff; 
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex; 
+    flex-direction: column;
+    
+    flex-shrink: 0; 
+}
+.mainloddy h2 {
+    text-align: center; 
+    margin-top: 0; 
+    margin-bottom: 30px; 
+    padding-bottom: 10px; 
+    
+    font-size: 2.2em; 
+    font-weight: 700; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    
+    
+    color: #4CAF50; 
+    letter-spacing: 1.5px; 
+    
+    border-bottom: 3px solid #4CAF50; 
+    width: fit-content; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+#rightvideo {
+    flex-grow: 1; 
+    max-width: calc(100% - 250px - 20px); 
+    background-color: #000000; 
+    border-radius: 6px;
+    overflow: hidden; 
+}
+.mainloddy {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.mainloddy h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+@media (max-width: 600px) {
+    .buttonContainers {
+        padding: 8px 10px;
+        gap: 5px;
+        bottom: 10px; 
     }
-} 
+    .buttonContainers svg {
+        font-size: 1.5rem; 
+    }
+    .buttonContainers .MuiIconButton-root {
+        padding: 8px;
+    }
+
+    .meetUserVideo {
+        height: 12vh;
+        width: 150px;
+        bottom: 70px; 
+        left: 10px;
+        transform: none; 
+        overflow: hidden; 
+    }
+    .meetUserVideo video {
+        transform: none; 
+    }
+    .chattingArea {
+        width: 100%; 
+        padding-bottom: 10px;
+    }
+
+
+    .chatRoom {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        z-index: 109;
+    }
+}
+
+/* code Editor */
+/* styles.module.css */
+/* styles.module.css */
+
+.codeEditorBox {
+    width: 80%;
+    margin: 20px auto; 
+    height: 70vh; 
+    
+    display: flex;
+    gap: 15px; 
+    
+    border: 1px solid #444; 
+    border-radius: 8px;
+    overflow: hidden; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
+}
+
+.mainScreen {
+    flex: 7; 
+    display: flex;
+    flex-direction: column; 
+    min-width: 0; 
+}
+
+.consoleoutput {
+    flex: 3; 
+    background-color: #1e1e1e; 
+    color: #cccccc; 
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; 
+    border-left: 1px solid #444; 
+}
+
+.consoleoutput > h3 {
+    color: #cdc7c7 !important;; 
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444; 
+    padding-bottom: 5px;
+}
+
+.navbarCodeeditor {
+    height: 5%; 
+    background-color: #252526; 
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+.navbarCodeeditor select {
+    background-color: #403030;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer;
+    outline: none;
+    appearance: none; 
+}

@@ -1,11 +1,15 @@
 
 import { Server } from "socket.io";
-
+import { registerCodeListeners } from './codeExecutionService.js'; 
 let connections = {};
 let messages = {};
 let timeOnline = {};
 
 export const connectToSocket = (server) => {
+       console.log("DEBUG: Setting up Socket.IO server."); 
+    
+
+  
   const io = new Server(server, {
     cors: {
       origin: "*",
@@ -15,9 +19,13 @@ export const connectToSocket = (server) => {
     },
   });
 
+  
+ 
   io.on("connection", (socket) => {
-    console.log("SOMETHING CONNECTED");
+  console.log("SUCCESS: Client connected with ID:", socket.id);
 
+
+    registerCodeListeners(socket, io);
     socket.on("join-call", (path) => {
       if (connections[path] === undefined) {
         connections[path] = [];
@@ -42,7 +50,7 @@ export const connectToSocket = (server) => {
             }
          }
     })
-
+ 
     socket.on("signal", (toId, message) => {
       io.to(toId).emit("signal", socket.id, message);
     });
@@ -75,8 +83,7 @@ export const connectToSocket = (server) => {
       }
     });
 
-    
-      
+     
 
     socket.on("disconnect", () => {
        var diffTime =  Math.abs(timeOnline[socket.id] - new Date())
