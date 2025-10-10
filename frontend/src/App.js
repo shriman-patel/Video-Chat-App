@@ -8,6 +8,7 @@ import VideoMeet from './pages/VideoMeet.jsx';
 import HomeComponent from './pages/home.jsx';
 import History from './pages/history.jsx';
 import Groups from './pages/Groups.jsx';
+
 function App() {
   return (
     <div className='App'>

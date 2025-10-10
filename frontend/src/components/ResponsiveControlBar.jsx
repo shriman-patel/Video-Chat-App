@@ -18,19 +18,18 @@ const ResponsiveControlBar = ({
     screenAvailable, toggleScreenShare, isScreenSharing,
     isCodingMode, toggleCodeEditor,
     newMessages, showModal, setModal,
-    styles // CSS classes
+    styles 
 }) => {
      const [showMoreMenu, setShowMoreMenu] = useState(false);
 
-    // Group 1: Buttons jo CHHOTI SCREEN par MENU mein jayenge (End Call, Screen Share, Code, Chat)
     const menuHiddenButtons = (
         <>
-            {/* End Call */}
+        
             <IconButton onClick={handleEndCall}  style={{ color: "red" }}>
                 <CallEndIcon />
             </IconButton>
             
-            {/* Screen Share */}
+
             {screenAvailable && (
                 <IconButton onClick={toggleScreenShare}  disabled={!screenAvailable} style={{ color: "white" }}>
                     {isScreenSharing ? <StopScreenShareIcon /> : <ScreenShareIcon />}

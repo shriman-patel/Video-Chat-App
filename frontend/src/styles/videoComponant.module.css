@@ -1,10 +1,12 @@
+/* --- Default Video Container --- */
 .meetVideoContainer{
     position: relative;
     height: 100vh;
     width: 100vw;
     background-color: #1e1e1e;
-    overflow: hidden; 
 }
+
+/* --- Local User Video (Mini/Absolute) --- */
 .meetUserVideo{
     border: 3px solid #ff4d4d; 
     height: 18vh;
@@ -13,7 +15,7 @@
     left: 20px; 
     bottom: 100px; 
     border-radius: 6px;
-    position: absolute;
+    position: absolute; /* Default: Absolute position पर छोटा वीडियो */
     z-index: 100; 
     box-shadow: 0 4px 20px rgba(255, 77, 77, 0.2);
     object-fit: cover;
@@ -39,12 +41,12 @@
 .meetUserVideo.codingModeMini video {
     transform: none; 
 }
-
-
 .meetUserVideo.codingModeMiniChatAdjust {
     right: 310px; 
     left: auto; 
 }
+
+/* --- Control Bar/Buttons --- */
 .buttonContainers {
     position: fixed;
     width: auto;
@@ -61,7 +63,6 @@
     gap: 15px;
     z-index: 110;
 }
-
 .buttonContainers .MuiIconButton-root {
     background: #2b2b2b;
     color: #ffffff;
@@ -72,21 +73,18 @@
 .buttonContainers .MuiIconButton-root[data-hangup="true"] {
     background: #ff4d4d; 
 }
-
 .buttonContainers .MuiIconButton-root:hover {
     background: #ff4d4d; 
     color: #ffffff;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(255, 77, 77, 0.4);
 }
-
-
 .buttonContainers svg {
     font-size: 1.8rem;
     color: inherit; 
 }
 
-
+/* --- Conference View (Remote Videos) - Default State --- */
 .conferenceView{
     display: flex;
     flex-wrap: wrap; 
@@ -96,7 +94,12 @@
     gap: 10px;
     border-radius: 10px;
     justify-content: center; 
-    align-items: center;
+    align-items: flex-start; 
+   
+    /* screenShareMode override के लिए position relative/static रखें */
+    position: relative; 
+      overflow-y: auto; 
+      overflow-x: hidden;
 }
 .conferenceView video {
     flex-grow: 1; 
@@ -114,7 +117,21 @@
     border-color: #ff4d4d; 
 }
 
+/* ---------------------------------------------------------------------- */
+/* --- START SCREEN SHARE 60/40 LAYOUT LOGIC (Local Screen Share के लिए) --- */
+/* ---------------------------------------------------------------------- */
+.conferenceView  video {
+    min-height: 30vh;
+    max-height: 80vh;
+    max-width: 80vh;
+    min-width: 30vw;
+    border-radius: 10px;
 
+}
+
+
+
+/* --- Chat Room Styles --- */
 .chatRoom {
     position: fixed;
     height: calc(100vh - 20px); 
@@ -137,7 +154,6 @@
     display: flex;
     flex-direction: column;
 }
-
 .chatContainer h1 {
     color: #ff4d4d; 
     border-bottom: 2px solid #333;
@@ -149,7 +165,6 @@
     overflow-y: auto;
     padding-bottom: 100px; 
 }
-
 .chattingArea{
     width: 100%; 
     padding-top: 10px;
@@ -161,16 +176,13 @@
     background: #252525; 
     box-sizing: border-box;
 }
-
 .chattingArea > div { 
     width: 100%; 
     margin-bottom: 10px; 
 }
-
 .chattingArea > div .MuiInputBase-root {
     width: 100%;
 }
-
 .chattingArea button {
     width: 100%; 
     display: block; 
@@ -183,18 +195,15 @@
     transition: background-color 0.3s;
     height: 40px; 
 }
-
 .chattingArea button:hover {
     background-color: #e04242;
 }
 
-
-
-
+/* --- Other Views --- */
 .codeEditorShrink {
     width: calc(100% - 300px); 
 }
-.chatContainerSide { 	
+.chatContainerSide { 
     position: absolute;
     height: 100%;
     right: 0;
@@ -207,25 +216,20 @@
     display: flex; 
     flex-direction: column;
 }
-
 .menuWrapper {
     display: flex; 
     gap: 10px;
     align-items: center;
 }
-
-
 .desktopVisible {
     display: flex; 
     gap: 10px;
     align-items: center;
 }
-
 .mobileMenu {
     display: none; 
     position: relative; 
 }
-
 .moreMenuDropdown {
     position: absolute;
     bottom: 50px; 
@@ -235,12 +239,13 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     z-index: 21;
-    
     display: flex;
     flex-direction: column; 
     gap: 8px;
     width: 150px; 
 }
+
+/* --- Lobby Styles --- */
 .entervideo {
     display: flex; 
     gap: 20px; 
@@ -250,19 +255,15 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-
 .sidebar {
     width: 250px;
     margin-top: 20px;
     padding: 20px;
-    
     background-color: #ffffff; 
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     display: flex; 
     flex-direction: column;
-    
     flex-shrink: 0; 
 }
 .mainloddy h2 {
@@ -270,15 +271,11 @@
     margin-top: 0; 
     margin-bottom: 30px; 
     padding-bottom: 10px; 
-    
     font-size: 2.2em; 
     font-weight: 700; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    
-    
     color: #4CAF50; 
     letter-spacing: 1.5px; 
-    
     border-bottom: 3px solid #4CAF50; 
     width: fit-content; 
     margin-left: auto; 
@@ -296,13 +293,13 @@
     margin: 40px auto;
     padding: 20px;
 }
-
 .mainloddy h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
+/* --- Media Queries (Mobile) --- */
 @media (max-width: 600px) {
     .buttonContainers {
         padding: 8px 10px;
@@ -332,7 +329,6 @@
         padding-bottom: 10px;
     }
 
-
     .chatRoom {
         width: 100%;
         height: 100%;
@@ -341,33 +337,63 @@
         border: none;
         z-index: 109;
     }
+    
+    /* 💡 START MOBILE SCREEN SHARE LOGIC (60/40 Vertical Split) */
+    .meetVideoContainer.screenShareMode > .meetUserVideo {
+        /* Local screen share video full width, 60% height */
+        width: 100vw;
+        height: 60vh;
+        left: 0;
+        top: 0;
+        bottom: auto;
+        max-width: 100vw;
+    }
+
+    .conferenceView.screenShareMode {
+        /* Remote videos container full width, 40% height */
+        width: 100%;
+        height: 40vh;
+        top: 60vh;
+        left: 0;
+        right: auto;
+        position: absolute;
+        flex-direction: row; /* Videos को side-by-side stack करें */
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-x: auto; /* अगर ज्यादा videos हों तो scroll करें */
+        overflow-y: hidden;
+    }
+
+    .conferenceView.screenShareMode video {
+        /* Remote videos को छोटी और निश्चित चौड़ाई दें */
+        flex-grow: 0;
+        width: 25vw;
+        min-width: 120px;
+        height: 15vh; 
+        max-width: 25vw;
+    }
+    /* 💡 END MOBILE SCREEN SHARE LOGIC */
 }
 
-/* code Editor */
-/* styles.module.css */
-/* styles.module.css */
-
+/* --- Code Editor Styles --- */
 .codeEditorBox {
     width: 80%;
     margin: 20px auto; 
     height: 70vh; 
-    
     display: flex;
     gap: 15px; 
-    
     border: 1px solid #444; 
     border-radius: 8px;
     overflow: hidden; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
 }
-
 .mainScreen {
     flex: 7; 
     display: flex;
     flex-direction: column; 
     min-width: 0; 
 }
-
 .consoleoutput {
     flex: 3; 
     background-color: #1e1e1e; 
@@ -378,7 +404,6 @@
     overflow-y: auto; 
     border-left: 1px solid #444; 
 }
-
 .consoleoutput > h3 {
     color: #cdc7c7 !important;; 
     margin-top: 0;
@@ -386,7 +411,6 @@
     border-bottom: 1px solid #444; 
     padding-bottom: 5px;
 }
-
 .navbarCodeeditor {
     height: 5%; 
     background-color: #252526; 
@@ -396,7 +420,7 @@
     justify-content: space-between; 
 }
 .navbarCodeeditor select {
-    background-color: #403030;
+    background-color: #dd7d7d;
     color: white;
     padding: 6px 12px;
     border: none;
@@ -404,4 +428,32 @@
     cursor: pointer;
     outline: none;
     appearance: none; 
+}
+@media (max-width: 600px) {
+    .codeEditorBox {
+        width: 95%; 
+        height: 75vh; 
+        margin: 10px auto;
+        flex-direction: column; 
+        gap: 5px; 
+    }
+    .mainScreen {
+        flex: 7; 
+        width: 100%; 
+        height: 70%; 
+    }
+    .consoleoutput {
+        flex: 3;
+        width: 100%; 
+        height: 30%; 
+        border-left: none; 
+        border-top: 1px solid #444; 
+    }
+    .navbarCodeeditor {
+        padding: 5px;
+    }
+    .navbarCodeeditor select {
+        padding: 4px 8px;
+        font-size: 0.9rem;
+    }
 }

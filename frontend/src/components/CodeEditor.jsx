@@ -1,86 +1,50 @@
-// Frontend/src/components/CodeEditor.jsx
+import { useRef, useState } from "react";
+import { Box, Stack } from "@mui/material"; 
+import { Editor } from "@monaco-editor/react";
+import LanguageSelector from "./LanguageSelector";
+import { CODE_SNIPPETS } from "../constants";
+import Output from "./Output";
 
-import React, { useState, useEffect } from 'react';
-import Editor from '@monaco-editor/react';
-import { Button } from '@mui/material'; 
-import styles from "../styles/videoComponant.module.css";
+const CodeEditor = () => {
+    const editorRef = useRef();
 
+    const [value, setValue] = useState(""); 
+    const [language, setLanguage] = useState("javascript");
 
-function CodeEditor({ socket, roomId }) {
-    
-    const [code, setCode] = useState('console.log("Hello, Apka Code!");');
-    const [language, setLanguage] = useState('javascript');
-    const [output, setOutput] = useState('Output will appear here...');
-
-    useEffect(() => {
-        if (!socket) return;
-        
-        socket.on("code-output", (data) => {
-            console.log("Received code output:", data.output);
-            setOutput(data.output); 
-        });
-        
-        return () => {
-            socket.off("code-output");
-        };
-    }, [socket]);
-    const handleCodeChange = (value) => {
-        setCode(value);
+    const onMount = (editor) => {
+        editorRef.current = editor;
+        editor.focus();
     };
-    
-    const runCode = () => {
-        if (!socket || !roomId) return;
-        
-        setOutput('Running code...'); 
 
-
-        socket.emit("run-code", {
-            roomId: roomId,
-            code: code,
-            language: language 
-        });
-        console.log("DEBUG: 'run-code' event emitted successfully.");
+    const onSelect = (language) => {
+        setLanguage(language);
+        setValue(CODE_SNIPPETS[language]);
     };
 
     return (
-        <div className={styles.codeEditorBox}>
-            <div className={styles.mainScreen}>
-                <div className={styles.navbarCodeeditor}>
-                    <select 
-                        value={language} 
-                        onChange={(e) => setLanguage(e.target.value)}
-                    >
-                        <option value="javascript">JavaScript</option>
-                         <option value="python">C</option>
-                          <option value="python">C++</option>
-                           <option value="python">JAVA</option>
-                            <option value="python">HTML</option>
-                             <option value="python">CSS</option>
-                                <option value="python">Python</option>
-                        <option value="python">Python</option>
-                    </select>
-                    
-                    <Button variant="contained" color="success" onClick={runCode}>
-                        Run Code
-                    </Button>
-                </div>
-                
-                <Editor
-                    height="95%"
-                    value={code} 
-                    language={language} 
-                    theme="vs-dark"
-                    onChange={handleCodeChange} 
-                />
-            </div>
-            <div className={styles.consoleoutput}>
-                <h3>Output:</h3>
-                <pre>
-                    {output} 
-                </pre>
-            </div>
-        </div>
+        <Box> 
+        
+            <Stack direction="row" spacing={4}> 
+                <Box sx={{ width: "50%" }}>
+                    <LanguageSelector language={language} onSelect={onSelect} />
+                    <Editor
+                        options={{
+                            minimap: {
+                                enabled: false,
+                            },
+                        }}
+                        height="75vh"
+                        theme="vs-dark"
+                        language={language}
+                        defaultValue={CODE_SNIPPETS[language]}
+                        onMount={onMount}
+                        value={value}
+                        onChange={(value) => setValue(value)}
+                    />
+                </Box>
+                <Output editorRef={editorRef} language={language} />
+            </Stack>
+        </Box>
     );
-}
-
+};
 export default CodeEditor;
