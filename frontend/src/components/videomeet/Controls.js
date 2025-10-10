@@ -1,4 +1,5 @@
 // src/components/videomeet/Controls.js
+
 import React from "react";
 import { Badge, IconButton } from "@mui/material";
 import VideocamIcon from "@mui/icons-material/Videocam";
@@ -9,6 +10,8 @@ import MicOffIcon from "@mui/icons-material/MicOff";
 import ScreenShareIcon from "@mui/icons-material/ScreenShare";
 import StopScreenShareIcon from "@mui/icons-material/StopScreenShare";
 import ChatIcon from "@mui/icons-material/Chat";
+import CodeIcon from '@mui/icons-material/Code'; // ✅ Code Editor Icon
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen'; // ✅ Icon to indicate closing the editor
 import styles from "../../styles/videoComponant.module.css"; // Import the styles
 
 export default function Controls({
@@ -17,6 +20,11 @@ export default function Controls({
   isScreenSharing,
   screenAvailable,
   newMessages,
+  
+  // ✅ New Props for Code Editor
+  isCodingMode,
+  toggleCodeEditor,
+  
   handleVideo,
   handleAudio,
   handleEndCall,
@@ -42,10 +50,23 @@ export default function Controls({
 
       {/* Screen Share Toggle */}
       {screenAvailable === true && (
-        <IconButton onClick={toggleScreenShare} style={{ color: "white" }}>
+        <IconButton 
+          onClick={toggleScreenShare} 
+          style={{ color: isScreenSharing ? "yellow" : "white" }}
+        >
           {isScreenSharing ? <StopScreenShareIcon /> : <ScreenShareIcon />}
         </IconButton>
       )}
+      
+      {/* 💻 Code Editor Toggle Button (NEW) */}
+      <IconButton 
+        onClick={toggleCodeEditor} 
+        // Coding Mode में होने पर रंग बदलें
+        style={{ color: isCodingMode ? "#33aaff" : "white" }} 
+      >
+        {/* यदि Coding Mode ऑन है, तो Close Icon दिखाएं, अन्यथा Code Icon */}
+        {isCodingMode ? <CloseFullscreenIcon /> : <CodeIcon />} 
+      </IconButton>
 
       {/* Chat Toggle */}
       <Badge badgeContent={newMessages} max={999} color="secondary" overlap="circular">
