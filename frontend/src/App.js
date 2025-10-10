@@ -4,7 +4,7 @@ import LandingPage from './pages/LandingPage.jsx';
 
 import Authentication from './pages/Authentication.jsx';
 import { AuthProvider } from './contexts/AuthContexts.jsx';
-import VideoMeet from './pages/VideoMeet.jsx';
+import VideoMeet from './components/videomeet/VideoMeet';
 import HomeComponent from './pages/home.jsx';
 import History from './pages/history.jsx';
 import Groups from './pages/Groups.jsx';

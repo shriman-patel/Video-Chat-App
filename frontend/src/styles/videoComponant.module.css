@@ -1,4 +1,3 @@
-/* --- Default Video Container --- */
 .meetVideoContainer{
     position: relative;
     height: 100vh;
@@ -6,7 +5,6 @@
     background-color: #1e1e1e;
 }
 
-/* --- Local User Video (Mini/Absolute) --- */
 .meetUserVideo{
     border: 3px solid #ff4d4d; 
     height: 18vh;
@@ -15,8 +13,8 @@
     left: 20px; 
     bottom: 100px; 
     border-radius: 6px;
-    position: absolute; /* Default: Absolute position पर छोटा वीडियो */
-    z-index: 100; 
+    position: absolute; 
+    z-index: 109; 
     box-shadow: 0 4px 20px rgba(255, 77, 77, 0.2);
     object-fit: cover;
     transform: skewX(-2deg);
@@ -46,7 +44,6 @@
     left: auto; 
 }
 
-/* --- Control Bar/Buttons --- */
 .buttonContainers {
     position: fixed;
     width: auto;
@@ -61,7 +58,7 @@
     background-color: rgba(0, 0, 0, 0.85);
     box-shadow: 0 0 25px rgba(255, 77, 77, 0.3);
     gap: 15px;
-    z-index: 110;
+    z-index: 110; 
 }
 .buttonContainers .MuiIconButton-root {
     background: #2b2b2b;
@@ -84,7 +81,6 @@
     color: inherit; 
 }
 
-/* --- Conference View (Remote Videos) - Default State --- */
 .conferenceView{
     display: flex;
     flex-wrap: wrap; 
@@ -95,11 +91,9 @@
     border-radius: 10px;
     justify-content: center; 
     align-items: flex-start; 
-   
-    /* screenShareMode override के लिए position relative/static रखें */
     position: relative; 
-      overflow-y: auto; 
-      overflow-x: hidden;
+    overflow-y: auto; 
+    overflow-x: hidden;
 }
 .conferenceView video {
     flex-grow: 1; 
@@ -117,21 +111,35 @@
     border-color: #ff4d4d; 
 }
 
-/* ---------------------------------------------------------------------- */
-/* --- START SCREEN SHARE 60/40 LAYOUT LOGIC (Local Screen Share के लिए) --- */
-/* ---------------------------------------------------------------------- */
 .conferenceView  video {
     min-height: 30vh;
     max-height: 80vh;
     max-width: 80vh;
     min-width: 30vw;
     border-radius: 10px;
-
 }
 
+.presentationViewer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0a0a; 
+    z-index: 95; 
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+.meetVideoContainer.presentationMode .conferenceView,
+.meetVideoContainer.presentationMode .meetUserVideo {
+    display: none; 
+}
+.meetVideoContainer.presentationMode .presentationViewer {
+    display: flex;
+}
 
-
-/* --- Chat Room Styles --- */
 .chatRoom {
     position: fixed;
     height: calc(100vh - 20px); 
@@ -143,7 +151,7 @@
     width: 300px;
     padding: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    z-index: 105; 
+    z-index: 111; 
     border: 1px solid #333;
     display: flex; 
     flex-direction: column; 
@@ -199,7 +207,6 @@
     background-color: #e04242;
 }
 
-/* --- Other Views --- */
 .codeEditorShrink {
     width: calc(100% - 300px); 
 }
@@ -245,7 +252,6 @@
     width: 150px; 
 }
 
-/* --- Lobby Styles --- */
 .entervideo {
     display: flex; 
     gap: 20px; 
@@ -299,7 +305,6 @@
     color: #333;
 }
 
-/* --- Media Queries (Mobile) --- */
 @media (max-width: 600px) {
     .buttonContainers {
         padding: 8px 10px;
@@ -335,12 +340,10 @@
         margin: 0;
         border-radius: 0;
         border: none;
-        z-index: 109;
+        z-index: 112; 
     }
     
-    /* 💡 START MOBILE SCREEN SHARE LOGIC (60/40 Vertical Split) */
     .meetVideoContainer.screenShareMode > .meetUserVideo {
-        /* Local screen share video full width, 60% height */
         width: 100vw;
         height: 60vh;
         left: 0;
@@ -350,33 +353,29 @@
     }
 
     .conferenceView.screenShareMode {
-        /* Remote videos container full width, 40% height */
         width: 100%;
         height: 40vh;
         top: 60vh;
         left: 0;
         right: auto;
         position: absolute;
-        flex-direction: row; /* Videos को side-by-side stack करें */
+        flex-direction: row;
         justify-content: flex-start;
         align-items: center;
         flex-wrap: nowrap;
-        overflow-x: auto; /* अगर ज्यादा videos हों तो scroll करें */
+        overflow-x: auto; 
         overflow-y: hidden;
     }
 
     .conferenceView.screenShareMode video {
-        /* Remote videos को छोटी और निश्चित चौड़ाई दें */
         flex-grow: 0;
         width: 25vw;
         min-width: 120px;
         height: 15vh; 
         max-width: 25vw;
     }
-    /* 💡 END MOBILE SCREEN SHARE LOGIC */
 }
 
-/* --- Code Editor Styles --- */
 .codeEditorBox {
     width: 80%;
     margin: 20px auto; 
@@ -405,7 +404,7 @@
     border-left: 1px solid #444; 
 }
 .consoleoutput > h3 {
-    color: #cdc7c7 !important;; 
+    color: #cdc7c7 !important; 
     margin-top: 0;
     margin-bottom: 10px;
     border-bottom: 1px solid #444; 
