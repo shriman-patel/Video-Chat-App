@@ -8,7 +8,7 @@ import ChatRoom from "./ChatRoom";
 import RemoteVideos from "./RemoteVideos";
 import LocalVideo from "./LocalVideo";
 import CodeEditor from "../CodeEditor"; // CodeEditor कंपोनेंट इंपोर्टेड है
-
+import FileViewer from "../FileViewer";
 const server_url = server;
 var connections = {};
 
@@ -36,6 +36,9 @@ export default function VideoMeetComponent() {
     let [newMessages, setNewMessages] = useState(0);
     let [askForUsername, setAskForUsername] = useState(true);
     let [username, setUsername] = useState("");
+    let [sharedFileUrl, setSharedFileUrl] = useState(null); 
+    let [fileType, setFileType] = useState(null);       
+    let [isSharingActive, setIsSharingActive] = useState(false); 
 
     // ✅ NEW STATE: Code Editor State (स्वतंत्र रूप से चलेगा)
     let [isCodingMode, setIsCodingMode] = useState(false);
@@ -356,6 +359,48 @@ export default function VideoMeetComponent() {
         // चैट को प्रभावित नहीं करता है
     };
 
+const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    let type;
+    if (file.type.startsWith('image/')) {
+        type = 'image';
+    } else if (file.type === 'application/pdf') {
+        type = 'pdf';
+    } else if (file.name.match(/\.(ppt|pptx)$/i)) {
+        type = 'ppt';
+    } else {
+        alert("केवल छवि (Image), PDF, या PPTX फ़ाइलें समर्थित हैं।");
+        return;
+    }
+  const reader = new FileReader();
+    reader.onload = (e) => {
+        const fileDataURL = e.target.result;
+        
+        // 1. सर्वर पर डेटा भेजें (सभी को)
+        socketRef.current.emit("share-file", fileDataURL, type);
+        
+        // 2. लोकल डिस्प्ले और स्टेट अपडेट करें
+        setSharedFileUrl(fileDataURL);
+        setFileType(type);
+        setIsSharingActive(true); // लोकल यूजर अब शेयर कर रहा है
+        event.target.value = ''; // ताकि एक ही फ़ाइल को दोबारा चुन सकें
+    };
+    reader.readAsDataURL(file); // फ़ाइल को Base64 (Data URL) के रूप में पढ़ें
+};
+const stopFileSharing = () => {
+    // 1. सर्वर को बताएं कि शेयरिंग बंद हो गई है
+    socketRef.current.emit("stop-file-share");
+    
+    // 2. लोकल स्टेट को रीसेट करें (तुरंत बंद करने के लिए)
+    setSharedFileUrl(null);
+    setFileType(null);
+    setIsSharingActive(false);
+};
+
+
+
     // === Socket & WebRTC Signaling Logic ===
 
     let gotMessageFromServer = (fromId, message) => {
@@ -391,6 +436,16 @@ export default function VideoMeetComponent() {
         socketRef.current = io.connect(server_url, { secure: false });
         socketRef.current.on("chat-message", addMessage);
         socketRef.current.on("signal", gotMessageFromServer);
+
+        // for file shering
+        socketRef.current.on("file-shared", (fileDataURL, type) => {
+        setSharedFileUrl(fileDataURL);
+        setFileType(type);
+       });
+        socketRef.current.on("file-share-stopped", () => {
+        setSharedFileUrl(null);
+        setFileType(null);
+        });
 
         socketRef.current.on("connect", () => {
             socketRef.current.emit("join-call", window.location.href);
@@ -510,6 +565,14 @@ export default function VideoMeetComponent() {
 
     return (
         <div className={styles.meetVideoContainer}>
+
+                <FileViewer 
+                fileUrl={sharedFileUrl} 
+                fileType={fileType} 
+                isLocalSharing={isSharingActive}
+                stopSharing={stopFileSharing} 
+                 />
+
             {/* Chat Room */}
             {showChat && (
                 <ChatRoom
@@ -546,6 +609,8 @@ export default function VideoMeetComponent() {
                 handleEndCall={handleEndCall}
                 toggleScreenShare={toggleScreenShare}
                 handleChatToggle={handleChatToggle}
+                handleFileSelect={handleFileSelect}
+                isSharingActive={isSharingActive}
             />
 
             <LocalVideo localVideoref={localVideoref} />
