@@ -3,90 +3,101 @@ import { Box, Typography, Button, Menu, MenuItem } from '@mui/material';
 import { LANGUAGE_VERSIONS } from "../constants";
 
 const languages = Object.entries(LANGUAGE_VERSIONS);
-// Chakra ACTIVE_COLOR को MUI style के लिए उपयोग किया गया
-const ACTIVE_COLOR = "skyblue"; // blue.400 के समान एक रंग
+const ACTIVE_COLOR = "#38bdf8"; // skyblue
 
 const LanguageSelector = ({ language, onSelect }) => {
-    // MUI Menu को नियंत्रित करने के लिए State
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+  const handleSelect = (lang) => {
+    onSelect(lang);
+    handleClose();
+  };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+  return (
+    <Box mb={2}>
+      <Typography
+        mb={1}
+        sx={{
+          color: "#EAEAEA",
+          fontWeight: 600,
+          fontFamily: "Poppins, sans-serif",
+          fontSize: "0.95rem",
+        }}
+      >
+        Language:
+      </Typography>
 
-    const handleSelect = (lang) => {
-        onSelect(lang);
-        handleClose();
-    };
+      <Button
+        variant="contained"
+        onClick={handleClick}
+        sx={{
+          background: "linear-gradient(90deg, #3b82f6, #2563eb)",
+          color: "#fff",
+          textTransform: "none",
+          fontWeight: 600,
+          borderRadius: "8px",
+          fontSize: "0.9rem",
+          px: 2,
+          boxShadow: "0 4px 10px rgba(59,130,246,0.4)",
+          "&:hover": {
+            background: "linear-gradient(90deg, #2563eb, #3b82f6)",
+            boxShadow: "0 6px 14px rgba(59,130,246,0.6)",
+          },
+        }}
+      >
+        {language}
+      </Button>
 
-    return (
-        // Chakra Box (MUI Box के साथ समान)
-        <Box ml={2} mb={4}>
-            {/* Chakra Text को Typography से बदला गया */}
-            <Typography mb={2} fontSize="lg">
-                Language:
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          sx: {
+            backgroundColor: "#0f172a",
+            color: "white",
+            border: "1px solid #1e293b",
+            borderRadius: "8px",
+            mt: 1,
+            boxShadow: "0 8px 20px rgba(0,0,0,0.5)",
+          },
+        }}
+      >
+        {languages.map(([lang, version]) => (
+          <MenuItem
+            key={lang}
+            onClick={() => handleSelect(lang)}
+            sx={{
+              fontFamily: "JetBrains Mono, monospace",
+              color: lang === language ? ACTIVE_COLOR : "#E5E7EB",
+              backgroundColor:
+                lang === language ? "rgba(56,189,248,0.15)" : "transparent",
+              fontSize: "0.85rem",
+              "&:hover": {
+                backgroundColor: "rgba(56,189,248,0.25)",
+                color: ACTIVE_COLOR,
+              },
+            }}
+          >
+            {lang}
+            <Typography
+              component="span"
+              sx={{
+                color: "#9ca3af",
+                fontSize: "0.75rem",
+                ml: 1,
+              }}
+            >
+              ({version})
             </Typography>
-            
-            {/* Chakra MenuButton as={Button} को MUI Button से बदला गया */}
-            <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleClick}
-            >
-                {language}
-            </Button>
-            
-            {/* Chakra Menu और MenuList को MUI Menu से बदला गया */}
-            <Menu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                // MenuList bg="#110c1b" को PaperProps के माध्यम से सेट किया गया
-                PaperProps={{
-                    sx: {
-                        backgroundColor: '#110c1b',
-                        color: 'white',
-                    },
-                }}
-            >
-                {languages.map(([lang, version]) => (
-                    <MenuItem
-                        key={lang}
-                        onClick={() => handleSelect(lang)}
-                        // Chakra MenuItem को MUI MenuItem से बदला गया
-                        // Styling को sx prop के माध्यम से सेट किया गया
-                        sx={{
-                            // Active color and background logic (color, bg)
-                            color: lang === language ? ACTIVE_COLOR : 'white',
-                            backgroundColor: lang === language ? '#333' : 'transparent', 
-                            
-                            // _hover logic
-                            '&:hover': {
-                                backgroundColor: '#333', // gray.900 के समान
-                                color: ACTIVE_COLOR,
-                            },
-                        }}
-                    >
-                        {lang}
-                        &nbsp;
-                        {/* Chakra Text as="span" को MUI Typography से बदला गया */}
-                        <Typography 
-                            component="span" 
-                            color="gray" // gray.600 के समान
-                            fontSize="sm" 
-                            sx={{ ml: 1 }}
-                        >
-                            ({version})
-                        </Typography>
-                    </MenuItem>
-                ))}
-            </Menu>
-        </Box>
-    );
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
+  );
 };
+
 export default LanguageSelector;

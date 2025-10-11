@@ -2,37 +2,43 @@
     position: relative;
     min-height: 100vh;
     min-width: 100vh;
-    background-color: #1e1e1e;
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    color: #EAEAEA;
 }
 
 .meetUserVideo{
-    border: 3px solid #ff4d4d; 
-    height: 18vh;
+    border: 3px solid #fca311;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(252, 163, 17, 0.3);
+    transition: all 0.3s ease;
+       height: 18vh;
     width: auto;
+  
     max-width: 250px;
     left: 20px; 
     bottom: 100px; 
-    border-radius: 6px;
-    position: absolute; 
+    position: fixed; 
     z-index: 109; 
-    box-shadow: 0 4px 20px rgba(255, 77, 77, 0.2);
     object-fit: cover;
-    transform: skewX(-2deg);
     overflow: hidden; 
 }
 .meetUserVideo video {
     width: 100%; 
     height: 100%;
     object-fit: cover;
-    transform: skewX(2deg); 
+    transition: all 0.3s ease;
+     border: 2px solid #415a77;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
+
 .meetUserVideo.codingModeMini {
     bottom: 50px;
     left: 10px;
     height: 150px;
     width: 200px; 
     z-index: 18; 
-    border: 3px solid #33a0ff;
+    border: 3px solid #38bdf8; /* skyblue accent */
     border-radius: 4px;
     transform: none; 
 }
@@ -56,7 +62,7 @@
     border-radius: 8px; 
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.85);
-    box-shadow: 0 0 25px rgba(255, 77, 77, 0.3);
+    box-shadow: 0 0 25px rgba(51, 160, 255, 0.4);
     gap: 15px;
     z-index: 110; 
 }
@@ -108,9 +114,8 @@
     transition: border-color 0.3s;
 }
 .conferenceView video:hover {
-    border-color: #ff4d4d; 
+    border-color: #33a0ff; /* premium hover accent */
 }
-
 .conferenceView  video {
     min-height: 30vh;
     max-height: 80vh;
@@ -142,69 +147,104 @@
 
 .chatRoom {
     position: fixed;
-    height: calc(100vh - 20px); 
+    height: calc(100vh - 20px);
     right: 10px;
     top: 10px;
-    background: #252525; 
-    color: #ffffff;
-    border-radius: 8px;
+     background: rgba(15, 23, 42, 0.95);
+    color: #e0e0e0;
+    border-radius: 10px;     /* main text color */
     width: 300px;
     padding: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    z-index: 111; 
+    z-index: 111;
     border: 1px solid #333;
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
-.chatContainer{
+
+.chatContainer {
     position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
+
 .chatContainer h1 {
-    color: #ff4d4d; 
+    color: #33a0ff; /* accent heading */
     border-bottom: 2px solid #333;
     padding-bottom: 10px;
     margin-bottom: 10px;
+    font-size: 1.5rem;
 }
-.chattingDisplay{
+
+.chattingDisplay {
     flex-grow: 1;
     overflow-y: auto;
-    padding-bottom: 100px; 
+    padding-bottom: 10px;
 }
-.chattingArea{
-    width: 100%; 
-    padding-top: 10px;
-    display: block; 
-    position: absolute; 
-    bottom: 0;
-    left: 0;
-    padding: 10px 15px; 
-    background: #252525; 
-    box-sizing: border-box;
+
+.chattingDisplay p {
+    margin: 0;
+    line-height: 1.4;
 }
-.chattingArea > div { 
-    width: 100%; 
-    margin-bottom: 10px; 
+
+.chattingDisplay div p:first-child {
+    font-weight: bold;
+    color: #38bdf8; /* sender color */
 }
-.chattingArea > div .MuiInputBase-root {
+
+.chattingArea {
+    display: flex;
+    gap: 10px;
+    align-items: center;
     width: 100%;
 }
+
 .chattingArea button {
-    width: 100%; 
-    display: block; 
-    background-color: #ff4d4d;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
     color: #ffffff;
     border: none;
-    padding: 8px 10px; 
-    border-radius: 4px;
+    padding: 8px 15px;
+    border-radius: 6px;
     cursor: pointer;
+    height: 45px;
     transition: background-color 0.3s;
-    height: 40px; 
 }
+
 .chattingArea button:hover {
-    background-color: #e04242;
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+}
+
+.chatTextField {
+    width: 100%;
+}
+
+.chatTextField :global(.MuiOutlinedInput-root) {
+    background-color: #1e1e1e;   /* input background dark */
+    color: #EAEAEA;              /* text inside input */
+    border-radius: 6px;
+}
+
+.chatTextField :global(.MuiOutlinedInput-input) {
+    color: #EAEAEA;              /* input text color */
+}
+
+.chatTextField :global(.MuiOutlinedInput-notchedOutline) {
+    border-color: #33a0ff;       /* border color */
+}
+
+.chatTextField :global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
+    border-color: #38bdf8;       /* border on focus */
+}
+
+.chatTextField :global(.MuiInputLabel-root) {
+    color: #EAEAEA;              /* label color */
+}
+
+.chatTextField :global(.MuiInputLabel-root.Mui-focused) {
+    color: #33a0ff;              /* label on focus */
 }
 
 .codeEditorShrink {
@@ -215,7 +255,7 @@
     height: 100%;
     right: 0;
     top: 0; 
-    background: wheat;
+    background: linear-gradient(135deg, #1e1e1e, #2b2b2b); /* premium gradient */
     width: 300px;
     z-index: 15; 
     padding: 10px 20px;
@@ -242,15 +282,9 @@
     bottom: 50px; 
     right: 0;
     background-color: rgba(34, 34, 34, 0.95);
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    z-index: 21;
-    display: flex;
-    flex-direction: column; 
-    gap: 8px;
-    width: 150px; 
+    color: #EAEAEA; /* premium text */
 }
+
 
 .entervideo {
     display: flex; 
@@ -412,7 +446,7 @@
 }
 .navbarCodeeditor {
     height: 5%; 
-    background-color: #252526; 
+    background-color: #0c0cc3; 
     padding: 5px 10px;
     display: flex;
     align-items: center;
@@ -454,5 +488,233 @@
     .navbarCodeeditor select {
         padding: 4px 8px;
         font-size: 0.9rem;
+    }
+}
+
+
+
+
+
+
+
+
+/* Lobby.js */
+/* videoComponant.module.css */
+
+.lobbyContainer{
+    min-height: 100vh; 
+    width: 100%;
+    /* New Light Background */
+  background: linear-gradient(135deg, #cce7ff, #0f172a);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.lobbyHeader {
+    /* Dark Text on Light Background */
+    color: #333333; 
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.lobbybox {
+    max-width: 80%; 
+    height: 80%;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    justify-content: center;
+    gap: 40px; 
+    align-items: center;
+    padding: 50px;
+    /* Soft Shadow */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    /* White Surface */
+    background-color: #FFFFFF;
+    /* Light Border */
+    border: 1px solid #DDDDDD;
+}
+
+.leftcontent {
+    /* Light Border */
+      
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
+    border: 1px solid #DDDDDD; 
+    border-radius: 10px; 
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    justify-content: center; 
+    gap: 15px; 
+    align-items: stretch; 
+    max-width: 300px; 
+}
+
+.leftcontent:hover {
+   transform: translateY(-2px);
+   
+    /* Shadow को 5% से 10% opacity तक बढ़ाएँ */
+}
+
+.textFieldWrapper {
+    width: 100%; 
+}
+.textFieldWrapper :global(.MuiOutlinedInput-root) {
+    /* White Background */
+    background-color: #FFFFFF !important;
+    border-radius: 4px;
+}
+.textFieldWrapper :global(.MuiOutlinedInput-input) {
+    /* Dark Text */
+    color: #333333 !important;
+}
+.textFieldWrapper :global(.MuiInputLabel-root) {
+    /* Dark Label */
+    color: #333333 !important; 
+}
+
+.textFieldWrapper :global(.MuiOutlinedInput-notchedOutline) {
+    /* Light Border */
+    border-color: #DDDDDD !important;
+}
+.textFieldWrapper :global(.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline) {
+    /* Hover Border */
+    border-color: #999999 !important;
+}
+.textFieldWrapper :global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
+    /* Blue Accent Focus */
+    border-color: #1976D2 !important; 
+    border-width: 2px !important;
+}
+.textFieldWrapper :global(.MuiFormControl-root) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.connectButton{
+    /* Blue Accent Background */
+    background-color: #1976D2 !important; 
+    /* White Text */
+    color: #FFFFFF !important; 
+    height: 50px; 
+    margin-top: 10px;
+    /* Blue Shadow */
+    box-shadow: 0 2px 6px rgba(25, 118, 210, 0.4) !important; 
+    border-radius: 8px !important; 
+}
+
+.connectButton:hover{
+    /* Darker Blue on Hover */
+    background-color: #1565C0 !important;
+}
+
+.connectButton[disabled] {
+    /* Light Gray Disabled Background */
+    background-color: #CCCCCC !important;
+    /* Light Text */
+    color: #999999 !important;
+    cursor: not-allowed;
+}
+
+.connectButton:focus {
+    /* Blue Focus Ring */
+    outline: 2px solid #1976D2; 
+    outline-offset: 3px;
+}
+
+.rightcontent{
+    /* Light Border */
+    border: 1px solid #DDDDDD; 
+    border-radius: 8px;
+    /* Light Background for Video Area */
+    background-color: #F8F8F8; 
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.rightcontent video {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 8px;
+}
+.rightcontent p {
+    margin-top: 10px;
+    /* Dark Text */
+    color: #333333;
+}
+@media (max-width: 600px) {
+    
+    .lobbyHeader {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .lobbybox {
+        max-width: 90%; 
+        height: auto; 
+        padding: 20px;
+        grid-template-columns: 1fr;
+        gap: 20px; 
+        justify-content: unset;
+        align-items: unset;
+    }
+
+    .leftcontent {
+        box-sizing: border-box; 
+        width: 100%; 
+        padding: 15px;
+        order: 3;
+        max-width: none; 
+    }
+    
+    .textFieldWrapper {
+        width: 100%; 
+    }
+    
+    .textFieldWrapper :global(.MuiFormControl-root) {
+        width: 100% !important; 
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .connectButton {
+        width: 100%; 
+        margin-top: 10px; 
+    }
+    
+    .rightcontent {
+        box-sizing: border-box; 
+        width: 100%; 
+        display: block; 
+        aspect-ratio: 16 / 9;
+        order: 2;
+        padding: 0;
+    }
+    
+    .rightcontent video {
+        flex-grow: 1; 
+        display: block !important; 
+        width: 100% !important; 
+        height: 100% !important;
+        object-fit: contain;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .rightcontent p {
+        font-size: 0.8rem; 
+        margin-top: 5px; 
+        margin-bottom: 0; 
+        text-align: center;
     }
 }
