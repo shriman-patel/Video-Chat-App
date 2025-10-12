@@ -30,7 +30,7 @@ body {
 .landingMainContainer p {
   font-size: 1.4rem;
   font-weight: 400;
-  color: #0f172a !important; /* dark navy for high contrast */
+  color:#d3d3d3 !important; /* dark navy for high contrast */
   margin-top: 1rem;
   margin-bottom: 2.5rem;
   max-width: 520px;

@@ -4,6 +4,7 @@ import { registerCodeListeners } from './codeExecutionService.js';
 let connections = {};
 let messages = {};
 let timeOnline = {};
+let userNames = {};
 
 export const connectToSocket = (server) => {
        console.log("DEBUG: Setting up Socket.IO server."); 
@@ -26,18 +27,23 @@ export const connectToSocket = (server) => {
 
 
     registerCodeListeners(socket, io);
-    socket.on("join-call", (path) => {
+    socket.on("join-call", ({ path, username }) => {
       if (connections[path] === undefined) {
         connections[path] = [];
+        userNames[path] = {};
       }
 
       connections[path].push(socket.id);
-
-
+      userNames[path][socket.id] = username;
       timeOnline[socket.id] = new Date();
 
       for (let a = 0; a < connections[path].length; a++) {
-        io.to(connections[path][a]).emit("user-joined", socket.id, connections[path]);
+        io.to(connections[path][a])
+        .emit("user-joined", 
+          socket.id,
+           connections[path],
+           userNames[path]
+          );
          }
          
          if (messages[path] !== undefined) {
@@ -100,9 +106,10 @@ export const connectToSocket = (server) => {
                 var index = connections[key].indexOf(socket.id)
                     
                 connections[key].splice(index, 1)
-
+                     delete userNames[key]?.[socket.id]; 
                     if(connections[key].length === 0){
-                        delete connections[key]
+                        delete connections[key];
+                        delete userNames[key]; 
                     }
                 }
            }
