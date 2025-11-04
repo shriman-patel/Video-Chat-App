@@ -1,8 +1,7 @@
-let IS_PROD = false;
-const server = IS_PROD ?
-    "https://apnacollegebackend.onrender.com" :
+const IS_PROD = window.location.hostname !== "localhost";
 
-    "http://localhost:8000"
-
+const server = IS_PROD
+  ? "https://video-chat-app-4tn6.onrender.com"
+  : "http://localhost:8000";
 
 export default server;
