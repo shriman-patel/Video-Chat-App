@@ -13,6 +13,7 @@ if(!username || !password){
 }
 try{
  const user = await User.findOne({ username });
+ console.log("find user" ,user)
  if(!user){
     return res.status(httpStatus.NOT_FOUND).json({message: "User not Found"})
  }
@@ -34,9 +35,14 @@ let isPasswordCorrect = await bcrypt.compare(password, user.password);
 // register
 const register = async(req, res)=>{
     const { name, username, password }= req.body;
+    console.log("Incoming register data:", req.body);
+
     try{
         const existingUser = await User.findOne({ username });
-     if(existingUser){
+            console.log("Existing user:", existingUser);
+
+   
+        if(existingUser){
         return res.status(httpStatus.FOUND)
          .json({message: "User already exists!"});
      }
@@ -47,7 +53,9 @@ const register = async(req, res)=>{
         username : username,
         password : hashedPassword,
      });
-     await newUser.save();
+    const savedUser =  await newUser.save();
+        console.log("✅ User saved successfully:", savedUser);
+
      res.status(httpStatus.CREATED).json({ message: "User registered" });
         
     }catch (e) {
