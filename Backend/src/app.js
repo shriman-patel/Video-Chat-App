@@ -9,6 +9,7 @@ import imageRoutes from "./routes/imageRoutes.js";
 import { connectToSocket } from "./controller/socketManager.js";
 
 dotenv.config();
+// hello
 
 const app = express();
 const server = createServer(app);
