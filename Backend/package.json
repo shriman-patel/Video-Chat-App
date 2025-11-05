@@ -5,10 +5,10 @@
   "author": "Shriman Patel",
   "license": "ISC",
   "type": "module",
-  "main": "server.js",
+  "main": "src/app.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "engines": {
     "node": ">=18.x"
