@@ -36,8 +36,8 @@ app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 
 // ✅ Routes
-// app.use("/api/v1/users", userRoutes);
-// app.use("/api/v1", imageRoutes);
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1", imageRoutes);
 
 // ✅ ---------- Serve React Build in Production ----------
 const __filename = fileURLToPath(import.meta.url);
