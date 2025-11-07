@@ -29,7 +29,7 @@ export default function LandingPage() {
 
       {/* Nav and main content */}
       <nav style={{ position: 'relative', zIndex: 1 }}>
-        <div className='navHeader'><h2>Apna Video Call</h2></div>
+        <div className='navHeader'><h2>CodeMeet</h2></div>
         <div className='navlist'>
           <p onClick={() => router("/home")}>Join as Guest</p>
           <p onClick={() => router("/auth")}>Register</p>
